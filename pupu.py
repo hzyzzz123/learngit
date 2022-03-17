@@ -36,11 +36,16 @@ def getProductMessage():
 #创建实时刷新的函数
 def nowTime():
     while(True):
+        #循环多次爬取
+        resopnse=requests.get(url,headers=headers)
+        dictionary=json.loads(resopnse.text)
+
         #当前价格
         nowPrice=dictionary['data']['price']/100
         #获取当前时间
         now=datetime.datetime.now()
         print('当前时间为:'+now.strftime("%Y/%m/%d %H:%M")+',价格为'+str(nowPrice))
+        #3秒刷新一次
         sleep(3)
 
 
